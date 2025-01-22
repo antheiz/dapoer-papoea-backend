@@ -17,7 +17,7 @@ Pastikan Anda telah menginstal:
 1. Clone repository ini:
    ```bash
    git clone https://github.com/antheiz/dapoer-papoea-backend.git
-   cd dapoer-papoea
+   cd dapoer-papoea-backend
    ```
 
 2. Instal dependensi:
