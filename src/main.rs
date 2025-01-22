@@ -52,11 +52,6 @@ async fn get_chapters() -> impl Responder {
     }
 }
 
-// Handler untuk POST request untuk membuat Chapter baru (API Pertama)
-async fn create_chapter(new_chapter: web::Json<Chapter>) -> impl Responder {
-    HttpResponse::Created().json(new_chapter.into_inner())
-}
-
 // Handler untuk GET request untuk mengambil recipes (API Kedua)
 async fn get_recipes() -> impl Responder {
     match read_json_file::<Vec<Recipe>>("data/recipes.json") {
@@ -65,10 +60,6 @@ async fn get_recipes() -> impl Responder {
     }
 }
 
-// Handler untuk POST request untuk membuat Recipe baru (API Kedua)
-async fn create_recipe(new_recipe: web::Json<Recipe>) -> impl Responder {
-    HttpResponse::Created().json(new_recipe.into_inner())
-}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -85,9 +76,7 @@ async fn main() -> std::io::Result<()> {
             .service(
                 web::scope("/api/v1")
                     .route("/chapters", web::get().to(get_chapters))
-                    .route("/chapters", web::post().to(create_chapter))
                     .route("/recipes", web::get().to(get_recipes))
-                    .route("/recipes", web::post().to(create_recipe))
             )
     })
     .bind("127.0.0.1:8080")?
